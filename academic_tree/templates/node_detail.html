@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {% if node_data %}
+            <h1>Node Information</h1>
+            <!-- 显示节点信息 -->
+                <p>Node ID: {{ node_data.nodeid }}</p>
+                <!-- 显示老师和学生信息 -->
+            <h2>Teachers</h2>
+                <ul>
+                    {% for teacher in node_data.teachers %}
+                        <li>{{ node_data.teacher.name }}</li>
+                    {% endfor %}
+                </ul>
+            <h2>Students</h2>
+                <ul>
+                    {% for student in node_data.students %}
+                        <li>{{ node_data.student.name }}</li>
+                    {% endfor %}
+                </ul>
+        {% else %}
+            <p>No data available for the given Node ID.</p>
+        {% endif %}
+
+    </div>
+{% endblock %}

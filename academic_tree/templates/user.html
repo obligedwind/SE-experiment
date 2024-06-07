@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>个人信息</h1>
+        <div class="user-info">
+            <p><strong>用户名：</strong>{{ user.username }}</p>
+            <p><strong>电话号码：</strong>{{ user.userprofile.phone_number }}</p>
+            <p><strong>电子邮件：</strong>{{ user.email }}</p>
+        </div>
+        <!-- 添加其他您想要显示的信息 -->
+        <a href="{% url 'mentorship:index' %}">
+            <button type="button">返回</button>
+        </a>
+    </div>
+    <!-- 添加其他页面内容 -->
+{% endblock %}

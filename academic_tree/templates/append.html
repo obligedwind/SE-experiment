@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>添加师承关系</h2>
+<form action="{% url 'mentorship:append' %}" method="post">
+        {% csrf_token %}
+        <label for="mentor">Teacher:</label>
+        <input type="text" id="mentor" name="teacher" required><br>
+
+        <label for="student">Student:</label>
+        <input type="text" id="student" name="student" required><br>
+        <label for="is_teacher">Is Teacher:</label>
+        <input type="checkbox" id="is_teacher" name="is_teacher" value="true"><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
