@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>申请修改师承树</h2>
+<form action="{% url 'mentorship:adjust' %}" method="post">
+        {% csrf_token %}
+
+
+         <select id="options" name="options">
+            <option value="option1">名称</option>
+            <option value="option2">主页</option>
+            <option value="option3">时间</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

@@ -1,22 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>添加师承关系</h2>
-<form action="{% url 'mentorship:append' %}" method="post">
+<h2>删除师承关系</h2>
+<form action="{% url 'mentorship:delete' %}" method="post">
         {% csrf_token %}
-        <label for="teacher">Teacher:</label>
-        <input type="text" id="teacher" name="teacher" required><br>
-
         <label for="phone1">Teacher's phone number:</label>
         <input type="text" id="phone1" name="phone1" required><br>
-
-        <label for="student">Student:</label>
-        <input type="text" id="student" name="student" required><br>
-
         <label for="phone2">Student's phone number:</label>
         <input type="text" id="phone2" name="phone2" required><br>
-
-
         <input type="submit" value="Submit">
     </form>
 {% endblock %}

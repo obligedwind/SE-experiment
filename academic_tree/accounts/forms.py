@@ -6,8 +6,8 @@ from django.core.validators import RegexValidator
 
 class SignUpForm(UserCreationForm):
     email = forms.CharField(max_length=254, required=True, widget=forms.EmailInput())
-    phone_regex = RegexValidator(regex=r'^1\d{10}$',
-                                 message="Phone number must be entered in the format: '1XXXXXXXXXX'. Up to 11 digits allowed.")
+    phone_regex = RegexValidator(regex=r'^\d+$',
+                                 message="Phone number must be entered in the format: 'XXXXXXXXXX'.")
     phone_number = forms.CharField(
         validators=[phone_regex],
         max_length=11,

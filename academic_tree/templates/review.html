@@ -1,0 +1,17 @@
+<!-- templates/review.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Review Merge List</h2>
+<form action="{% url 'mentorship:review' %}" method="post">
+    <h1>Merge List</h1>
+    {% csrf_token %}
+    {% for key, parameter in dict.items %}
+        <div>
+            <input type="checkbox" name="parameters" value="{{ key }}">
+            <label>{{ parameter }}</label>
+        </div>
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

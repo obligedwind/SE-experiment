@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
+</head>
+<body>
+    <div id="graph"></div>
+
+    <script>
+        // 从 Django 模板上下文中获取节点和边的数据
+        const nodes = JSON.parse('{{ nodes|escapejs }}');
+        const edges = JSON.parse('{{ edges|escapejs }}');
+
+        // 转换节点数据格式
+        const nodeData = nodes.map(node => ({
+            id: node.id,
+            name: node.name,
+            info: node.info,
+            url: node.url
+        }));
+
+        // 转换边数据格式
+        const edgeData = edges.map(edge => ({
+            source: edge.source_id,
+            target: edge.target_id
+        }));
+
+        // 使用 D3.js 绘制图形
+        const width = 800;
+        const height = 600;
+
+        const svg = d3.select("#graph")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        svg.append("defs").append("marker")
+            .attr("id", "arrowhead")
+            .attr("viewBox", "-0 -5 10 10")
+            .attr("refX", 15)
+            .attr("refY", 0)
+            .attr("orient", "auto")
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("xoverflow", "visible")
+            .append("svg:path")
+            .attr("d", "M 0,-5 L 10 ,0 L 0,5")
+            .attr("fill", "#999")
+            .style("stroke", "none");
+
+        const simulation = d3.forceSimulation(nodeData)
+            .force("link", d3.forceLink(edgeData).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(edgeData)
+            .enter().append("line")
+            .attr("stroke", "#999")
+            .attr("marker-end", "url(#arrowhead)")
+            .attr("stroke-width", 1.5);
+
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(nodeData)
+            .enter().append("circle")
+            .attr("r", 10)
+            .attr("fill", "#69b3a2")
+            .on("click",
+                // d => window.open(d.url)
+                function(event, d) {
+                window.open(d.url);}
+            );
+
+        node.append("title")
+            .text(d => d.name + ": " + d.info + ": " + d.url);
+            // .on("click", d => {
+            //     console.log(d.url);
+            //     window.open(d.url);
+            // })
+
+
+        simulation.on("tick", () => {
+            link.attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node.attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+        });
+    </script>
+</body>
+</html>
+

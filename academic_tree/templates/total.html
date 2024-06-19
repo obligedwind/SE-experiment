@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>查看师承树</h2>
+<form action="{% url 'mentorship:total' %}" method="post">
+        {% csrf_token %}
+
+        <label for="phone">phone number:</label>
+        <input type="text" id="phone" name="phone" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

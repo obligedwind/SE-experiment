@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2></h2>
+<form action="{% url 'mentorship:url_a' %}" method="post">
+        {% csrf_token %}
+
+        <label for="phone"> phone number of the modified :</label>
+        <input type="text" id="phone" name="phone" required><br>
+        <label for="url"> Page's url after modified:</label>
+        <input type="text" id="url" name="url" required><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
