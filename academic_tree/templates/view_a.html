@@ -6,10 +6,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
 </head>
 <body>
-<h2>查看个人视图</h2>
+<h2>编辑个人视图</h2>
 <div id="graph"></div>
-        <a href="{% url 'mentorship:view_a' %}">
-            <button type="button">编辑师承树</button>
+        <a href="{% url 'mentorship:append' %}">
+            <button type="button">添加师承关系</button>
+        </a>
+        <a href="{% url 'mentorship:delete' %}">
+            <button type="button">删除师承关系</button>
+        </a>
+        <a href="{% url 'mentorship:adjust' %}">
+            <button type="button">申请修改师承树</button>
         </a>
     <script>
         // 从 Django 模板上下文中获取节点和边的数据
@@ -98,4 +104,3 @@
     </script>
 </body>
 </html>
-

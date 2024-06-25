@@ -15,5 +15,6 @@ urlpatterns = [
     path('review/',views.review,name ='review'),
     path('total/',views.total,name='total'),
     path('total_view/',views.total_view,name='total_view'),
+    path('view_a/',views.view_a,name='view_a'),
     # path('graph/', views.graph_view, name='graph'),
 ]

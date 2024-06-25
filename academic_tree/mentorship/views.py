@@ -238,7 +238,19 @@ def total_view(request):
     return render(request, 'graph.html', {'nodes': json.dumps(nodes_list), 'edges': json.dumps(edges_list)})
 
 
+
 from .models import Node, Edge
+
+def view_a(request):
+    nodes = Node.objects.all()
+    edges = Edge.objects.all()
+    nodes_list = list(nodes.values('id', 'name', 'info', 'url'))
+    edges_list = list(edges.values('id', 'source_id', 'target_id'))
+    return render(request,'view_a.html', {'nodes': json.dumps(nodes_list), 'edges': json.dumps(edges_list)})
+
+
+
+
 
 # def graph_view(request):
 #     # 删除所有 Node 记录
